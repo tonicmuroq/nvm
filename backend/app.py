@@ -80,7 +80,7 @@ def summary():
 def scores():
     conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
-    c.execute('SELECT person, SUM(anger) FROM events GROUP BY person')
+    c.execute('SELECT person, SUM(anger) as total FROM events GROUP BY person ORDER BY total DESC')
     rows = c.fetchall()
     conn.close()
     scores = []
