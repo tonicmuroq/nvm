@@ -6,6 +6,14 @@ from collections import defaultdict
 app = Flask(__name__)
 DB_PATH = 'anger.db'
 
+# Add CORS headers to every response
+@app.after_request
+def add_cors_headers(response):
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
+    response.headers['Access-Control-Allow-Methods'] = 'GET,POST,OPTIONS'
+    return response
+
 def init_db():
     conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
@@ -32,8 +40,11 @@ def calc_anger(content):
     return level
 
 
-@app.route('/events', methods=['POST'])
+@app.route('/events', methods=['POST', 'OPTIONS'])
 def add_event():
+    if request.method == 'OPTIONS':
+        # Preflight request
+        return '', 204
     data = request.get_json()
     person = data.get('person')
     content = data.get('content')
@@ -48,8 +59,10 @@ def add_event():
     return jsonify({'status': 'ok', 'anger': anger})
 
 
-@app.route('/events', methods=['GET'])
+@app.route('/events', methods=['GET', 'OPTIONS'])
 def list_events():
+    if request.method == 'OPTIONS':
+        return '', 204
     conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
     c.execute('SELECT id, person, timestamp, content, anger FROM events ORDER BY timestamp DESC')
@@ -59,8 +72,10 @@ def list_events():
     return jsonify(events)
 
 
-@app.route('/summary', methods=['GET'])
+@app.route('/summary', methods=['GET', 'OPTIONS'])
 def summary():
+    if request.method == 'OPTIONS':
+        return '', 204
     date = request.args.get('date')
     conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
@@ -76,8 +91,10 @@ def summary():
     return jsonify({'total_anger': total, 'count': len(rows)})
 
 
-@app.route('/scores', methods=['GET'])
+@app.route('/scores', methods=['GET', 'OPTIONS'])
 def scores():
+    if request.method == 'OPTIONS':
+        return '', 204
     conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
     c.execute('SELECT person, SUM(anger) as total FROM events GROUP BY person ORDER BY total DESC')
@@ -97,8 +114,10 @@ def scores():
     return jsonify(scores)
 
 
-@app.route('/filter', methods=['GET'])
+@app.route('/filter', methods=['GET', 'OPTIONS'])
 def filter_events():
+    if request.method == 'OPTIONS':
+        return '', 204
     start = request.args.get('start')
     end = request.args.get('end')
     level = request.args.get('level')
