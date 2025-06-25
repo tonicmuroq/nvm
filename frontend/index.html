@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>NVM - Grudge Tracker</title>
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+<body>
+  <div id="app"></div>
+  <script type="text/babel">
+    function App() {
+      const [events, setEvents] = React.useState([]);
+      const [person, setPerson] = React.useState('');
+      const [content, setContent] = React.useState('');
+
+      const API_BASE = 'http://127.0.0.1:5000';
+
+      const load = () => {
+        fetch(`${API_BASE}/events`).then(r => r.json()).then(setEvents);
+      };
+
+      const add = () => {
+        fetch(`${API_BASE}/events`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ person, content })
+        }).then(load);
+      };
+
+      React.useEffect(load, []);
+
+      return (
+        <div>
+          <h1>NVM - Grudge Tracker</h1>
+          <div>
+            <input placeholder="Person" value={person} onChange={e => setPerson(e.target.value)} />
+            <input placeholder="Content" value={content} onChange={e => setContent(e.target.value)} />
+            <button onClick={add}>Add</button>
+          </div>
+          <ul>
+            {events.map(e => (
+              <li key={e.id}>{e.timestamp}: {e.person} - {e.content} (anger {e.anger})</li>
+            ))}
+          </ul>
+        </div>
+      );
+    }
+
+    ReactDOM.render(<App />, document.getElementById('app'));
+  </script>
+</body>
+</html>
