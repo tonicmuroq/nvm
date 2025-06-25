@@ -3,6 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <title>NVM - Grudge Tracker</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 0 20px;
+      line-height: 1.4;
+    }
+    h1 {
+      color: #333;
+      text-align: center;
+    }
+    input {
+      padding: 6px 10px;
+      margin-right: 6px;
+    }
+    button {
+      padding: 6px 12px;
+    }
+    li {
+      margin: 4px 0;
+    }
+  </style>
   <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
   <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
   <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
@@ -15,12 +38,14 @@
       const [person, setPerson] = React.useState('');
       const [content, setContent] = React.useState('');
 
+      const API_BASE = 'http://127.0.0.1:5000';
+
       const load = () => {
-        fetch('/events').then(r => r.json()).then(setEvents);
+        fetch(`${API_BASE}/events`).then(r => r.json()).then(setEvents);
       };
 
       const add = () => {
-        fetch('/events', {
+        fetch(`${API_BASE}/events`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ person, content })
