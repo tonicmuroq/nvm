@@ -64,7 +64,7 @@
       const [person, setPerson] = React.useState('');
       const [content, setContent] = React.useState('');
 
-      const API_BASE = 'http://127.0.0.1:5000';
+      const API_BASE = '';
 
       const load = () => {
         fetch(`${API_BASE}/scores`).then(r => r.json()).then(setScores);

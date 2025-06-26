@@ -1,2 +1,4 @@
 __pycache__/
 backend/anger.db
+worker/dist
+worker/node_modules
