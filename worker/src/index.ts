@@ -1,5 +1,6 @@
 export interface Env {
   DB: D1Database;
+  ASSETS: Fetcher;
 }
 
 interface EventRecord {
@@ -107,6 +108,6 @@ export default {
       return jsonResponse(results.map((r: any) => ({ person: r.person, anger: r.anger })));
     }
 
-    return new Response('Not Found', { status: 404 });
+    return env.ASSETS.fetch(request);
   },
 };
