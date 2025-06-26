@@ -37,3 +37,21 @@ To run the frontend, simply open the `frontend/index.html` file in your web brow
   - `GET /summary?date=YYYY-MM-DD` daily total anger
   - `GET /scores` ranking of people with anger grades
   - `GET /filter?start=...&end=...&level=...` filtered events
+
+## Cloudflare Worker Deployment
+
+The `worker` folder contains a TypeScript backend. During the build step the
+frontend `index.html` file is copied into `worker/dist/site` so the Worker can
+serve it. Visiting the Worker URL loads `index.html` from that folder. The
+Worker also uses a D1 database for storage.
+
+1. Build the worker script and copy the frontend:
+   ```bash
+   cd worker
+   npm run build
+   ```
+2. Deploy using Wrangler:
+   ```bash
+   wrangler deploy
+   ```
+   Configure your D1 database binding in `wrangler.toml` before deploying.

@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "es2020",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "outDir": "dist/worker",
+    "rootDir": "src",
+    "strict": true,
+    "esModuleInterop": true,
+    "allowJs": false,
+    "skipLibCheck": true,
+    "lib": ["es2020", "webworker"]
+  },
+  "include": ["src", "global.d.ts"]
+}

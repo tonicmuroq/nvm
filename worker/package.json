@@ -1,0 +1,23 @@
+{
+  "name": "worker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc && mkdir -p dist/site && cp ../frontend/index.html dist/site/",
+    "start": "wrangler dev",
+    "lint": "tsc --noEmit"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20240404.0",
+    "typescript": "^5.4.0"
+  },
+  "dependencies": {
+    "@cloudflare/d1": "^0.10.1"
+  }
+}
