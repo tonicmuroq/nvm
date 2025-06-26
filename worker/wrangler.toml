@@ -11,3 +11,4 @@ database_name = "grudges"
 [site]
 bucket = "dist/site"
 entry-point = "."
+binding = "ASSETS"
