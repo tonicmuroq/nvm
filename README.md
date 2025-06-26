@@ -1,21 +1,29 @@
 # NVM Grudge Tracker
 
+
 A simple web app to record things that made you angry.
 
 ## How to Run
 
+
 This project uses `uv` for Python package management.
+
 
 ### Backend
 
+
 1.  **Install `uv`:**
+
     If you don't have it, install `uv` by running this command:
+
     ```bash
     curl -LsSf https://astral.sh/uv/install.sh | sh
     ```
 
 2.  **Sync Dependencies & Run Server:**
+
     Navigate to the `backend` directory, sync the dependencies, and then run the Flask server. `uv run` handles the virtual environment automatically.
+
     ```bash
     cd backend
     uv sync
