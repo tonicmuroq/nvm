@@ -6,3 +6,7 @@ interface D1PreparedStatement {
   run(): Promise<any>;
   all(): Promise<{ results: any[] }>;
 }
+
+interface Fetcher {
+  fetch(request: Request): Promise<Response>;
+}

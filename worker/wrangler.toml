@@ -10,3 +10,4 @@ database_name = "nvm"
 
 [site]
 bucket = "dist/site"
+binding = "ASSETS"
