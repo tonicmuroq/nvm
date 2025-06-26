@@ -8,6 +8,7 @@ binding = "DB"
 database_id = "ad10e1b1-345f-41ea-a76f-00c4925a72d6"
 database_name = "nvm"
 
-[site]
-bucket = "dist/site"
+[assets]
+directory = "dist/site"
 binding = "ASSETS"
+
