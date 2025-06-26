@@ -2,7 +2,32 @@
 
 A simple web app to record things that made you angry.
 
-## Backend
+## How to Run
+
+This project uses `uv` for Python package management.
+
+### Backend
+
+1.  **Install `uv`:**
+    If you don't have it, install `uv` by running this command:
+    ```bash
+    curl -LsSf https://astral.sh/uv/install.sh | sh
+    ```
+
+2.  **Sync Dependencies & Run Server:**
+    Navigate to the `backend` directory, sync the dependencies, and then run the Flask server. `uv run` handles the virtual environment automatically.
+    ```bash
+    cd backend
+    uv sync
+    uv run flask run
+    ```
+    The backend will be running at `http://127.0.0.1:5000`.
+
+### Frontend
+
+To run the frontend, simply open the `frontend/index.html` file in your web browser.
+
+## Backend Details
 
 - Python Flask backend (see `backend/app.py`)
 - Data stored in SQLite (`anger.db`)
@@ -12,15 +37,3 @@ A simple web app to record things that made you angry.
   - `GET /summary?date=YYYY-MM-DD` daily total anger
   - `GET /scores` ranking of people with anger grades
   - `GET /filter?start=...&end=...&level=...` filtered events
-
-Run backend:
-
-```bash
-pip install -r backend/requirements.txt
-python backend/app.py
-```
-
-## Frontend
-
-Open `frontend/index.html` in your browser. It uses React from CDN and
-allows adding events and viewing the list.
