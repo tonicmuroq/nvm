@@ -1,13 +1,12 @@
-name = "grudge-tracker"
+name = "nvm"
 main = "dist/worker/index.js"
 compatibility_date = "2024-05-17"
 
 # D1 database binding
 [[d1_databases]]
 binding = "DB"
-# database_id to be filled by user
-database_name = "grudges"
+database_id = "ad10e1b1-345f-41ea-a76f-00c4925a72d6"
+database_name = "nvm"
 
 [site]
 bucket = "dist/site"
-entry-point = "."
